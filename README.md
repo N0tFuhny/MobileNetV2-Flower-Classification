@@ -1,43 +1,56 @@
 # Image Classification - MobileNetV2 Transfer Learning
 
 ## Deskripsi Project
-Project ini adalah model klasifikasi gambar menggunakan **Transfer Learning MobileNetV2** dengan TensorFlow dan Keras. Model dilatih untuk mengklasifikasikan gambar bunga ke dalam beberapa kelas menggunakan dataset Flower Photos.
+Project ini adalah implementasi klasifikasi gambar menggunakan **Transfer Learning MobileNetV2** dengan TensorFlow dan Keras untuk mengidentifikasi beberapa jenis bunga pada dataset Flower Photos.
 
-Model ini dirancang untuk meningkatkan akurasi dan generalisasi dibandingkan CNN konvensional dengan memanfaatkan pretrained weights dari ImageNet.
+Model dibangun menggunakan arsitektur Sequential dengan tambahan layer CNN eksplisit seperti Conv2D dan MaxPooling2D untuk memenuhi implementasi dasar Convolutional Neural Network (CNN), serta memanfaatkan pretrained weights ImageNet dari MobileNetV2 untuk meningkatkan performa klasifikasi dan generalisasi model.
 
 ---
 
 ## Dataset
-- Flower Photos Dataset
-- Total kelas: 5 kelas
-- Dataset telah dibagi menjadi:
-  - Training set
-  - Validation set
-  - Testing set
+- Dataset: Flower Photos Dataset
+- Total kelas: 5 kelas bunga
+- Jumlah dataset: >3000 gambar
+- Dataset dibagi menjadi:
+  - Training Set
+  - Validation Set
+  - Testing Set
 
 ---
 
 ## Arsitektur Model
-Model menggunakan pendekatan transfer learning dengan struktur:
 
-- MobileNetV2 (Pretrained ImageNet, tanpa top layer)
+Model menggunakan kombinasi CNN Sequential dan Transfer Learning dengan struktur:
+
+- Sequential Model
+- MobileNetV2 (Pretrained ImageNet, include_top=False)
+- Conv2D Layer
+- MaxPooling2D Layer
 - GlobalAveragePooling2D
 - BatchNormalization
-- Dense (256 neuron, ReLU)
+- Dense Layer (256 neuron, ReLU)
 - Dropout (0.5)
-- Output layer (Softmax)
+- Output Layer (Softmax)
 
 ---
 
 ## Teknik Training
-- Transfer Learning (Frozen base model)
-- Data Augmentation:
-  - Rotation
-  - Zoom
-  - Width/Height Shift
-  - Brightness adjustment
-  - Horizontal flip
-- Optimizer: Adam (learning rate 0.0003)
+
+### Transfer Learning
+- Menggunakan MobileNetV2 pretrained ImageNet
+- Base model dibekukan (frozen) saat training
+
+### Data Augmentation
+- Rotation
+- Zoom
+- Width Shift
+- Height Shift
+- Brightness Adjustment
+- Horizontal Flip
+
+### Optimizer dan Callback
+- Optimizer: Adam
+- Learning Rate: 0.0003
 - Callback:
   - EarlyStopping
   - ReduceLROnPlateau
@@ -46,29 +59,48 @@ Model menggunakan pendekatan transfer learning dengan struktur:
 
 ## Hasil Evaluasi Model
 
-- Training Accuracy: **0.8979 (89.79%)**
-- Validation Accuracy: **0.8940 (89.40%)**
-- Test Accuracy: **0.8921 (89.21%)**
-- Test Loss: **0.3174**
+### Accuracy
+- Training Accuracy: **97.35%**
+- Validation Accuracy: **89.40%**
+- Test Accuracy: **89.57%**
+
+### Loss
+- Test Loss: **0.2833**
 
 ---
 
 ## Analisis Performa
-Model menunjukkan performa yang stabil dengan:
-- Gap kecil antara training dan validation accuracy → tidak overfitting signifikan
-- Loss rendah pada test set → generalisasi baik
-- Akurasi mendekati 90% → memenuhi target evaluasi
+
+Model menunjukkan performa klasifikasi yang sangat baik dengan akurasi testing mendekati 90%.
+
+Beberapa faktor yang membantu peningkatan performa model:
+- Penggunaan pretrained MobileNetV2 sebagai feature extractor
+- Data augmentation untuk meningkatkan generalisasi
+- BatchNormalization dan Dropout untuk mengurangi overfitting
+- Callback learning rate scheduler untuk stabilitas training
+
+Perbedaan antara training accuracy dan validation accuracy menunjukkan model memiliki performa training yang sangat tinggi, namun masih tetap mampu melakukan generalisasi dengan baik pada validation dan testing set.
 
 ---
 
 ## Format Model Output
-Model disimpan dalam beberapa format untuk deployment:
 
-- SavedModel (TensorFlow standard format)
-- TensorFlow Lite (Mobile deployment)
-- TensorFlow.js (Browser deployment)
+Model berhasil dikonversi ke beberapa format deployment:
+
+- SavedModel
+- TensorFlow Lite (TFLite)
+- TensorFlow.js (TFJS)
 
 ---
 
 ## Kesimpulan
-Model MobileNetV2 memberikan peningkatan signifikan dibandingkan CNN konvensional, dengan hasil yang lebih stabil, akurasi lebih tinggi, dan kemampuan generalisasi yang lebih baik pada dataset flower classification.
+
+Project ini berhasil mengimplementasikan kombinasi CNN Sequential dan Transfer Learning MobileNetV2 untuk klasifikasi gambar bunga dengan performa tinggi.
+
+Dengan tambahan Conv2D dan MaxPooling2D secara eksplisit, model tetap memenuhi kriteria implementasi CNN dasar sekaligus memperoleh keuntungan dari transfer learning modern.
+
+Model mencapai:
+- Akurasi training di atas 97%
+- Akurasi validation dan testing di atas 89%
+- Generalisasi model yang stabil
+- Dukungan deployment multi-platform melalui SavedModel, TFLite, dan TensorFlow.js
