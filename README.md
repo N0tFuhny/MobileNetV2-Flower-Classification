@@ -1,3 +1,4 @@
+
 # Image Classification - MobileNetV2 Transfer Learning
 
 ## Deskripsi Project
@@ -60,12 +61,12 @@ Model menggunakan kombinasi CNN Sequential dan Transfer Learning dengan struktur
 ## Hasil Evaluasi Model
 
 ### Accuracy
-- Training Accuracy: **97.35%**
-- Validation Accuracy: **89.40%**
-- Test Accuracy: **89.57%**
+- Training Accuracy: **98.40%**
+- Validation Accuracy: **89.95%**
+- Test Accuracy: **89.75%**
 
 ### Loss
-- Test Loss: **0.2833**
+- Test Loss: **0.3186**
 
 ---
 
@@ -79,7 +80,7 @@ Beberapa faktor yang membantu peningkatan performa model:
 - BatchNormalization dan Dropout untuk mengurangi overfitting
 - Callback learning rate scheduler untuk stabilitas training
 
-Perbedaan antara training accuracy dan validation accuracy menunjukkan model memiliki performa training yang sangat tinggi, namun masih tetap mampu melakukan generalisasi dengan baik pada validation dan testing set.
+Perbedaan antara training accuracy dan validation accuracy menunjukkan model memiliki kemampuan pembelajaran yang sangat tinggi pada training set, namun masih mampu mempertahankan generalisasi yang baik pada validation dan testing set.
 
 ---
 
@@ -100,7 +101,7 @@ Project ini berhasil mengimplementasikan kombinasi CNN Sequential dan Transfer L
 Dengan tambahan Conv2D dan MaxPooling2D secara eksplisit, model tetap memenuhi kriteria implementasi CNN dasar sekaligus memperoleh keuntungan dari transfer learning modern.
 
 Model mencapai:
-- Akurasi training di atas 97%
-- Akurasi validation dan testing di atas 89%
+- Akurasi training di atas 98%
+- Akurasi validation dan testing mendekati 90%
 - Generalisasi model yang stabil
 - Dukungan deployment multi-platform melalui SavedModel, TFLite, dan TensorFlow.js
