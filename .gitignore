@@ -1,0 +1,20 @@
+# Ignore downloaded dataset files and generated dataset splits
+flower_photos/
+flower_photos.tgz
+dataset/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment files
+.env
+.venv
+
+# macOS files
+.DS_Store
